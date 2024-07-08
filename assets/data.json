@@ -1,0 +1,90 @@
+[
+    {
+        "catagory": "Curry",
+        "variations": [
+            {
+                "name": "Crab",
+                "price": 18,
+                "extras": [
+                    {
+                        "name": "Crab",
+                        "price": 6
+                    }
+                ]
+            },
+            {
+                "name": "Chicken",
+                "price": 14
+            },
+            {
+                "name": "Prawn + Chicken",
+                "price": 18
+            },
+            {
+                "name": "Beef",
+                "price": 17,
+                "extras": [
+                    {
+                        "name": "Potato",
+                        "price": 2
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "catagory": "Noodle soup",
+        "variations": [
+            {
+                "name": "Beef",
+                "price": 12
+            },
+            {
+                "name": "Prawn",
+                "price": 12
+            },
+            {
+                "name": "Chicken",
+                "price": 10
+            },
+            {
+                "name": "Fishball",
+                "price": 10
+            },
+            {
+                "name": "Meatball",
+                "price": 10
+            }
+        ],
+        "shared_extras": [
+            {
+                "name": "Beef",
+                "price": 3
+            },
+            {
+                "name": "Sausages",
+                "price": 2
+            },
+            {
+                "name": "Fishball",
+                "price": 2
+            },
+            {
+                "name": "Meatball",
+                "price": 2
+            },
+            {
+                "name": "Chicken thing",
+                "price": 2
+            },
+            {
+                "name": "Chicken",
+                "price": 2
+            },
+            {
+                "name": "Prawn",
+                "price": 3
+            }
+        ]
+    }
+]
