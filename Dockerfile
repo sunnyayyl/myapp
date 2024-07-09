@@ -1,4 +1,4 @@
-FROM ghcr.io/sunnyayyl/flutter-dockerfile@sha256:f36f1bb639ac9b93ba16aded8c736ef79084e8f639e8dfc0060a700c563f88f9
+FROM ghcr.io/sunnyayyl/flutter-dockerfile@sha256:d5f4389cc07d9b19faeea492af0747e290341877fd55e48a027c1b77a6191762
 WORKDIR /project
 COPY ./ /project/
 CMD ["/project/entrypoint.sh"]
