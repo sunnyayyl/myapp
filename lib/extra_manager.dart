@@ -27,6 +27,7 @@ class ExtraMenuManager {
   }
 
   void update(int index, ExtraEquivalent extraCatalogue) {
+    /*
     if (index == extraControllers.length - 1) {
       extraControllers.add(TextEditingController());
       update(index, extraCatalogue);
@@ -47,6 +48,29 @@ class ExtraMenuManager {
     }
     cleanup();
     print(extras);
+    */
+    manualUpdate(index, extraControllers[index].text, extraCatalogue);
+  }
+
+  void manualUpdate(int index, String value, ExtraEquivalent extraCatalogue) {
+    if (index == extraControllers.length - 1) {
+      extraControllers.add(TextEditingController());
+      manualUpdate(index, value, extraCatalogue);
+    } else if (index < extraControllers.length - 1) {
+      if (extras.length == index) {
+        extras.add(PlaceholderExtra());
+      }
+      if (extraCatalogue[value] == null) {
+        extras[index] = InvalidExtra();
+      } else {
+        extras[index] = Extra(
+          name: value,
+          price: extraCatalogue[value]!.price,
+          allowDuplicate: extraCatalogue[value]!.allowDuplicate,
+        );
+      }
+    }
+    cleanup();
   }
 
   Map<String, ExtraMapItem> getFilteredExtras(ExtraEquivalent extraCatalogue) {

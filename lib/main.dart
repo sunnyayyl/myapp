@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
             return FloatingActionButton(
               onPressed: () async {
                 RecipeItem item =
-                    await addMenuItemDialog(context, snapshot.data!);
+                    await addMenuItemDialog(context, snapshot.data!, null);
                 recipe.add(item);
                 print(item.toJson());
                 setState(() {});
@@ -82,6 +82,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     itemBuilder: (context, index) {
                       if (index < recipe.length) {
                         return ListTile(
+                          onTap: () async {
+                            RecipeItem item = await addMenuItemDialog(
+                                context, snapshot.data!, recipe[index]);
+                            ;
+                            setState(() {
+                              recipe[index] = item;
+                            });
+                          },
                           title: Text(
                               "${recipe[index].menuItemName} (${recipe[index].varientName})"),
                           subtitle: recipe[index].extras.isNotEmpty

@@ -3,13 +3,22 @@ import 'package:myapp/menu_data.dart';
 
 import 'extra_manager.dart';
 
-Future<RecipeItem> addMenuItemDialog(
-    BuildContext context, MenuEquivalent menuEquivalent) async {
+Future<RecipeItem> addMenuItemDialog(BuildContext context,
+    MenuEquivalent menuEquivalent, RecipeItem? item) async {
   final TextEditingController catagoryController = TextEditingController();
   final TextEditingController varientController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
   ExtraMenuManager manager = ExtraMenuManager();
   manager.reset();
+  if (item != null) {
+    catagoryController.text = item.menuItemName;
+    varientController.text = item.varientName;
+    noteController.text = item.notes ?? "";
+    for (final (int i, String v) in item.extras.indexed) {
+      manager.manualUpdate(
+          i, v, menuEquivalent[item.menuItemName]![item.varientName]!.extras);
+    }
+  }
   return await showDialog(
         context: context,
         builder: (BuildContext context) {
