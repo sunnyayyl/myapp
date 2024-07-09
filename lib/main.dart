@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: "I have no idea what name to put here"),
     );
   }
 }
@@ -33,21 +33,51 @@ class _MyHomePageState extends State<MyHomePage> {
   late Future<List<MenuItem>> menu;
   late Future<MenuEquivalent> menuEquivalent;
   late List<RecipeItem> recipe;
+  late List<RecipeItem> selected;
   @override
   void initState() {
     super.initState();
     menu = getMenuData();
     menuEquivalent = getEquivalentMenu(menu);
     recipe = [];
+    selected = [];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
+      appBar: selected.isEmpty
+          ? AppBar(
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+              title: Text(widget.title),
+            )
+          : AppBar(
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+              actions: [
+                ButtonBar(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        for (RecipeItem item in selected) {
+                          recipe.remove(item);
+                        }
+                        setState(() {
+                          selected = [];
+                        });
+                      },
+                      icon: const Icon(Icons.delete),
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            selected = [];
+                          });
+                        },
+                        icon: const Icon(Icons.close))
+                  ],
+                )
+              ],
+            ),
       floatingActionButton: FutureBuilder(
         future: menuEquivalent,
         builder: (context, snapshot) {
@@ -81,7 +111,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     itemCount: recipe.length + 1,
                     itemBuilder: (context, index) {
                       if (index < recipe.length) {
+                        bool isSelected = selected.contains(recipe[index]);
                         return ListTile(
+                          selected: isSelected,
+                          onLongPress: () {
+                            setState(() {
+                              if (isSelected) {
+                                selected.remove(recipe[index]);
+                              } else {
+                                selected.add(recipe[index]);
+                              }
+                            });
+                          },
+                          leading: isSelected
+                              ? const Icon(Icons.check_circle)
+                              : null,
                           onTap: () async {
                             RecipeItem item = await addMenuItemDialog(
                                 context, snapshot.data!, recipe[index]);
