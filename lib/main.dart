@@ -129,12 +129,22 @@ class _MyHomePageState extends State<MyHomePage> {
                               ? const Icon(Icons.check_circle)
                               : null,
                           onTap: () async {
-                            RecipeItem? item = await addMenuItemDialog(
-                                context, snapshot.data!, recipe[index]);
-                            ;
-                            if (item != null) {
+                            if (selected.isEmpty) {
+                              RecipeItem? item = await addMenuItemDialog(
+                                  context, snapshot.data!, recipe[index]);
+                              ;
+                              if (item != null) {
+                                setState(() {
+                                  recipe[index] = item;
+                                });
+                              }
+                            } else {
                               setState(() {
-                                recipe[index] = item;
+                                if (isSelected) {
+                                  selected.remove(recipe[index]);
+                                } else {
+                                  selected.add(recipe[index]);
+                                }
                               });
                             }
                           },
