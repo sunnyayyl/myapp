@@ -84,11 +84,13 @@ class _MyHomePageState extends State<MyHomePage> {
           if (snapshot.hasData) {
             return FloatingActionButton(
               onPressed: () async {
-                RecipeItem item =
+                RecipeItem? item =
                     await addMenuItemDialog(context, snapshot.data!, null);
-                recipe.add(item);
-                print(item.toJson());
-                setState(() {});
+                if (item != null) {
+                  recipe.add(item);
+                  print(item.toJson());
+                  setState(() {});
+                }
               },
               tooltip: "Add item",
               child: const Icon(Icons.add),
@@ -127,12 +129,14 @@ class _MyHomePageState extends State<MyHomePage> {
                               ? const Icon(Icons.check_circle)
                               : null,
                           onTap: () async {
-                            RecipeItem item = await addMenuItemDialog(
+                            RecipeItem? item = await addMenuItemDialog(
                                 context, snapshot.data!, recipe[index]);
                             ;
-                            setState(() {
-                              recipe[index] = item;
-                            });
+                            if (item != null) {
+                              setState(() {
+                                recipe[index] = item;
+                              });
+                            }
                           },
                           title: Text(
                               "${recipe[index].menuItemName} (${recipe[index].varientName})"),
