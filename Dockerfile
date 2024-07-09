@@ -7,8 +7,9 @@ RUN apk update
 RUN apk add git curl unzip xz zip glu bash
 RUN git clone https://github.com/flutter/flutter.git flutter
 ENV PATH="$PATH:/flutter/bin"
-RUN flutter channel stable
+RUN flutter doctor
 RUN yes | flutter doctor --android-licenses
+RUN flutter channel stable
 WORKDIR /project
 COPY * /project/
 CMD ["/project/entrypoint.sh"]
