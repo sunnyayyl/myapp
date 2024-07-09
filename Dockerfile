@@ -3,7 +3,7 @@ ENV JAVA_HOME=/opt/java/openjdk
 COPY --from=eclipse-temurin:latest $JAVA_HOME $JAVA_HOME
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 WORKDIR /
-COPY ./assert_checksum.bash /
+COPY ./assert_checksum /
 RUN apk update
 RUN apk add git curl unzip xz zip glu bash gcompat
 RUN curl --output commandlinetools-linux.zip "https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip"
