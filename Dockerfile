@@ -4,7 +4,7 @@ COPY --from=eclipse-temurin:latest $JAVA_HOME $JAVA_HOME
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 WORKDIR /
 RUN apk update
-RUN apk add git curl unzip xz zip glu
+RUN apk add git curl unzip xz zip glu bash
 RUN git clone https://github.com/flutter/flutter.git flutter
 ENV PATH="$PATH:/flutter/bin"
 RUN flutter channel stable
