@@ -11,5 +11,5 @@ RUN flutter doctor
 RUN yes | flutter doctor --android-licenses
 RUN flutter channel stable
 WORKDIR /project
-COPY * /project/
+COPY ./ /project/
 CMD ["/project/entrypoint.sh"]
