@@ -5,12 +5,15 @@ jobs:
         steps:
         - name: Checkout
           uses: actions/checkout@v4
-        - name: Setup Pages
-          uses: actions/configure-pages@v5
         - name: Build
           uses: ./
-        - name: Upload built file
+        - name: Upload web artifact
           uses: actions/upload-artifact@v4
           with:
-            name: workspace_artifacts
-            path: ${{ github.workspace }}/web-built
+            name: web-artifact
+            path: ${{ github.workspace }}/web-artifact
+        - name: Upload web artifact
+          uses: actions/upload-artifact@v4
+          with:
+            name: web-artifact
+            path: ${{ github.workspace }}/web-artifact
