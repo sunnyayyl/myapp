@@ -3,7 +3,7 @@ import 'package:myapp/menu_data.dart';
 
 import 'extra_manager.dart';
 
-Future<RecipeItem>? addMenuItemDialog(BuildContext context,
+Future<RecipeItem?>? addMenuItemDialog(BuildContext context,
     MenuEquivalent menuEquivalent, RecipeItem? item) async {
   final TextEditingController catagoryController = TextEditingController();
   final TextEditingController varientController = TextEditingController();
