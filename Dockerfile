@@ -13,6 +13,7 @@ RUN unzip commandlinetools-linux.zip -d android_sdk
 ENV ANDROID_HOME="/android_sdk"
 RUN git clone https://github.com/flutter/flutter.git flutter --depth 1 -b stable
 ENV PATH="$PATH:/flutter/bin:/flutter/bin/cache/dart-sdk/bin:/android_sdk/bin"
+RUN flutter config --no-cli-animations
 RUN flutter doctor
 RUN yes | flutter doctor --android-licenses
 WORKDIR /project
