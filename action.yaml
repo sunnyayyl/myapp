@@ -1,0 +1,4 @@
+name: "Flutter"
+runs:
+  using: "docker"
+  image: "Dockerfile"
