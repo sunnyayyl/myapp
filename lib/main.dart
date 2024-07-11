@@ -150,20 +150,37 @@ class _MyHomePageState extends State<MyHomePage> {
                           },
                           title: Text(
                               "${recipe[index].menuItemName} (${recipe[index].varientName})"),
-                          subtitle: recipe[index].extras.isNotEmpty
-                              ? Text(recipe[index].extras.join(", "))
+                          subtitle: recipe[index].extras.isNotEmpty ||
+                                  recipe[index].notes != null
+                              ? Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    recipe[index].extras.isNotEmpty
+                                        ? Text(recipe[index].extras.join(", "))
+                                        : const SizedBox(
+                                            width: 0,
+                                            height: 0,
+                                          ),
+                                    (recipe[index].notes != null
+                                        ? Text(
+                                            "${recipe[index].notes}",
+                                            style: const TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          )
+                                        : const SizedBox(
+                                            width: 0,
+                                            height: 0,
+                                          )),
+                                  ],
+                                )
                               : null,
                           trailing: Text(
-                            recipe[index].getPrice(menuData).toString() +
-                                (recipe[index].notes == null
-                                    ? ""
-                                    : "\n${recipe[index].notes}"),
-                            style: const TextStyle(fontSize: 15),
-                          ),
+                              recipe[index].getPrice(menuData).toString(),
+                              style: const TextStyle(fontSize: 15)),
                         );
                       } else if (index == recipe.length) {
                         return ListTile(
-                          title: Text("Total"),
+                          title: const Text("Total"),
                           trailing: Text(
                               style: const TextStyle(fontSize: 15),
                               recipe
